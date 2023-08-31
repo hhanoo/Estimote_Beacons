@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/device_id"
+        android:id="@+id/device_id_tv"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -31,13 +31,13 @@
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/device_distance"
-        app:layout_constraintStart_toEndOf="@id/device_id"
+        app:layout_constraintEnd_toStartOf="@id/device_distance_tv"
+        app:layout_constraintStart_toEndOf="@id/device_id_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
-        android:id="@+id/device_distance"
+        android:id="@+id/device_distance_tv"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
@@ -60,8 +60,46 @@
         android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toTopOf="@id/info"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/device_id"
+        app:layout_constraintTop_toBottomOf="@id/device_id_tv"
         tools:listitem="@layout/item_list" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/list">
+
+        <TextView
+            android:id="@+id/device_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/device_distance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/device_id" />
+
+        <TextView
+            android:id="@+id/device_azimuth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/device_distance" />
+
+        <TextView
+            android:id="@+id/device_elevation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/device_azimuth" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

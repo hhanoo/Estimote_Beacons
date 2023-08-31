@@ -7,18 +7,39 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.krri.uwb.databinding.ItemListBinding
 
-class BeaconListAdapter(diffUtil: DiffUtil.ItemCallback<BeaconData>) :
-    ListAdapter<BeaconData, BeaconListAdapter.BeaconViewHolder>(diffUtil) {
+
+class BeaconListAdapter(
+    diffUtil: DiffUtil.ItemCallback<BeaconData>,
+) : ListAdapter<BeaconData, BeaconListAdapter.BeaconViewHolder>(diffUtil) {
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    private var itemClickListener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        itemClickListener = listener
+    }
 
     // 각 뷰들을 binding 사용하여 View 연결
     inner class BeaconViewHolder(var binding: ItemListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        init {
+            binding.root.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    itemClickListener?.onItemClick(position)
+                }
+            }
+        }
+
         fun bind(data: BeaconData) {
             binding.apply {
-                binding.deviceId.text = data.id
-                binding.deviceRssi.text = data.rssi.toString()
-                binding.deviceDistance.text = data.distance.toString()
+                deviceId.text = data.id
+                deviceRssi.text = data.rssi.toString()
+                deviceDistance.text = data.distance.toString()
             }
         }
     }
